@@ -9,3 +9,8 @@ build/
 
 *~
 *.swp
+
+.idea/
+.project
+cmake-build-debug/
+

@@ -68,7 +68,7 @@ We decided to create Makefiles with cmake to keep this project as platform
 agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
 that students don't feel pressured to use one IDE or another.
 
-However! I'd love to help people get up and running with their IDEs of choice.
+However! We'd love to help people get up and running with their IDEs of choice.
 If you've created a profile for an IDE that you think other students would
 appreciate, we'd love to have you add the requisite profile files and
 instructions to ide_profiles/. For example if you wanted to add a VS Code
@@ -80,36 +80,5 @@ profile, you'd add:
 The README should explain what the profile does, how to take advantage of it,
 and how to install it.
 
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
-
-One last note here: regardless of the IDE used, every submitted project must
+Regardless of the IDE used, every submitted project must
 still be compilable with cmake and make.
-
-# CarND-Mercedes-SF-Utilities
-Tools for Sensor Fusion processing.
-
----
-
-These tools were created by the team at Mercedes during the develoment of the
-Sensor Fusion module.
-
-We're providing them as-is for the time being, but I'm more than happy to take
-a look at any PRs if you see room for improvement!
-
-### 1. matlab_examples/
-
-Here, you'll find the Matlab code used to generate the sample data in the
-project. Feel free to generate your own data for practice if you have access to
-Matlab. [_Note: this is NOT necessary for completing either project. You do NOT
-need access to Matlab. At the moment, we cannot help you get a license to
-Matlab. Yes, we agree it's too expensive and it would be really cool if we
-could help you get cheap licenses._]
-
-### 2. python/
-You'll find a few Jupyter notebooks here that you might find useful for
-visualizing and analyzing your data. Some files are hardcoded so you might need
-to edit them before you get any use out of the notebooks.
