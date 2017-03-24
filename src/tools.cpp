@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tools.h"
+#include <cmath>
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
@@ -60,12 +61,16 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
     //TODO: YOUR CODE HERE
 
-    //check division by zero
-    if(px == 0.0f && py == 0.0f){
-        std::cout << "Division by 0" << std::endl;
-    }
+
     float pxy2 = px*px + py*py;
     float sqrt_pxy2 = sqrt(pxy2);
+
+    //check division by zero
+    if(std::fabs(pxy2) <= 0.0001f){
+        std::cout << "Division by 0" << std::endl;
+        return Hj;
+    }
+
 
     Hj(0,0) = px / sqrt_pxy2;
     Hj(0,1) = py / sqrt_pxy2;
