@@ -39,8 +39,8 @@ FusionEKF::FusionEKF() {
     * Q is the process noise
     * R is the measurement noise
   */
-    double_t  noise_ax  =9.0;
-    double_t  noise_ay;
+    noise_ax = 9.0;
+    noise_ay = 9.0;
 }
 
 /**
