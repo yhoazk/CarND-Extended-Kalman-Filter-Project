@@ -52,16 +52,14 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   */
     MatrixXd Hj= MatrixXd::Zero(3,4);
     //recover state parameters
-    float px = x_state(0);
-    float py = x_state(1);
-    float vx = x_state(2);
-    float vy = x_state(3);
-
-    //TODO: YOUR CODE HERE
+    float px = (float)x_state(0);
+    float py = (float)x_state(1);
+    float vx = (float)x_state(2);
+    float vy = (float)x_state(3);
 
 
     float pxy2 = px*px + py*py;
-    float sqrt_pxy2 = sqrt(pxy2);
+    float sqrt_pxy2 =(float) sqrt(pxy2);
 
     //check division by zero
     if(std::fabs(pxy2) <= 0.0001f){
@@ -73,7 +71,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
     Hj(0,0) = px / sqrt_pxy2;
     Hj(0,1) = py / sqrt_pxy2;
-    Hj(1,0) = (-1.0 * py)/pxy2;
+    Hj(1,0) = (-1.0f * py)/pxy2;
     Hj(1,1) = px/pxy2;
     Hj(2,0) = py * (vx*py - vy*px)/(pxy2*sqrt_pxy2); // TODO: OPtimizar X^3/2 por X*X^1/2
     Hj(2,1) = px * (vy*px - vx*py)/(pxy2*sqrt_pxy2);

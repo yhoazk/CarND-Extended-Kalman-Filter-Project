@@ -46,8 +46,8 @@ void KalmanFilter::Update(const VectorXd &z) {
 
     //new estimate
     x_ = x_ + (K * y);
-    long x_size = x_.size();
-    MatrixXd I = MatrixXd::Identity(x_size, x_size);
+    //long x_size = x_.size();
+    MatrixXd I = MatrixXd::Identity(4, 4);
     P_ = (I - K * H_) * P_;
 }
 
@@ -74,13 +74,16 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   //new estimate
   x_ = x_ + (K * y);
-  long x_size = x_.size();
-  MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  //long x_size = x_.size();
+  MatrixXd I = MatrixXd::Identity(4, 4);
   P_ = (I - K * H_) * P_;
 
 /*
  * RMSE <= [0.08, 0.08, 0.60, 0.60] when using the file: "sample-laser-radar-measurement-data-1.txt".
  */
 
+  /*
+   * The px, py, vx, vy output coordinates have an RMSE <= [0.20, 0.20, .50, .85] when using the file: "sample-laser-radar-measurement-data-2.txt".
+   * */
 
 }
