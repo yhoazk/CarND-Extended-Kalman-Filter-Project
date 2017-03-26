@@ -61,22 +61,22 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
     float pxy2 = px*px + py*py;
     float sqrt_pxy2 =(float) sqrt(pxy2);
 
+
     //check division by zero
     if(std::fabs(pxy2) <= 0.0001f){
-        std::cout << "Division by 0" << std::endl;
-        return Hj;
+        std::cout << "Division by 0 in TOOLS::CalculateJacobian" << std::endl;
     }
-
-  //compute the Jacobian matrix
-
-    Hj(0,0) = px / sqrt_pxy2;
-    Hj(0,1) = py / sqrt_pxy2;
-    Hj(1,0) = (-1.0f * py)/pxy2;
-    Hj(1,1) = px/pxy2;
-    Hj(2,0) = py * (vx*py - vy*px)/(pxy2*sqrt_pxy2); // TODO: OPtimizar X^3/2 por X*X^1/2
-    Hj(2,1) = px * (vy*px - vx*py)/(pxy2*sqrt_pxy2);
-    Hj(2,2) = px / sqrt_pxy2;
-    Hj(2,3) = py / sqrt_pxy2;
+    else{
+    //compute the Jacobian matrix
+      Hj(0,0) = px / sqrt_pxy2;
+      Hj(0,1) = py / sqrt_pxy2;
+      Hj(1,0) = (-1.0f * py)/pxy2;
+      Hj(1,1) = px/pxy2;
+      Hj(2,0) = py * (vx*py - vy*px)/(pxy2*sqrt_pxy2);
+      Hj(2,1) = px * (vy*px - vx*py)/(pxy2*sqrt_pxy2);
+      Hj(2,2) = px / sqrt_pxy2;
+      Hj(2,3) = py / sqrt_pxy2;
+    }
 
     return Hj;
 }

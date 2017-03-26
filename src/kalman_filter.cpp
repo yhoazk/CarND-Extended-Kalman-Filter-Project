@@ -31,21 +31,24 @@ void KalmanFilter::Predict() {
     P_ = F_ * P_ * F_.transpose()  + Q_;
 }
 
+void KalmanFilter::processUpdate(const VectorXd &y){
+  MatrixXd Ht = H_.transpose();
+  MatrixXd Si = (H_ * P_ * Ht + R_).inverse();
+  MatrixXd PHt = P_ * Ht;
+  MatrixXd K = PHt * Si;
+
+  //new estimate
+  x_ = x_ + (K * y);
+  P_ = (I - K * H_) * P_;
+}
+
 void KalmanFilter::Update(const VectorXd &z) {
   /**
     * update the state by using Kalman Filter equations
   */
 
     VectorXd z_pred = H_ * x_;
-    VectorXd y = z - z_pred;
-    MatrixXd Ht = H_.transpose();
-    MatrixXd Si = (H_ * P_ * Ht + R_).inverse();
-    MatrixXd PHt = P_ * Ht;
-    MatrixXd K = PHt * Si;
-
-    //new estimate
-    x_ = x_ + (K * y);
-    P_ = (I - K * H_) * P_;
+    processUpdate(z - z_pred);
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -62,18 +65,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   z_pred_EKF[1] = atan2(x_[1],x_[0]); // atan2 takes returns always in the correct quadrant
   z_pred_EKF[2] = (x_[0]*x_[2] +  x_[1]*x_[3]) / sqrt_pxy2;
   /* from here is the same as the "normal" KF */
-  VectorXd y = z - z_pred_EKF;
+  processUpdate(z - z_pred_EKF);
 
-
-  MatrixXd Ht = H_.transpose();
-  MatrixXd Si = (H_ * P_ * Ht + R_).inverse(); // this only applies if we dont use S
- // MatrixXd Si = S.inverse();
-  MatrixXd PHt = P_ * Ht;
-  MatrixXd K = PHt * Si;
-
-  //new estimate
-  x_ = x_ + (K * y);
-  P_ = (I - K * H_) * P_;
 
 /*
  * RMSE <= [0.08, 0.08, 0.60, 0.60] when using the file: "sample-laser-radar-measurement-data-1.txt".

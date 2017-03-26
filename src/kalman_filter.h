@@ -5,6 +5,7 @@
 
 class KalmanFilter {
   static const size_t SIZE_X = 4;
+  void processUpdate(const Eigen::VectorXd &y);
 public:
 
   // state vector
