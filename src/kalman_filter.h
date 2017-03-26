@@ -4,6 +4,7 @@
 #include "tools.h"
 
 class KalmanFilter {
+  static const size_t SIZE_X = 4;
 public:
 
   // state vector
@@ -23,6 +24,9 @@ public:
 
   // measurement covariance matrix
   Eigen::MatrixXd R_;
+  //
+  Eigen::MatrixXd  I;
+
 
   /**
    * Constructor

@@ -3,7 +3,10 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-KalmanFilter::KalmanFilter() {}
+KalmanFilter::KalmanFilter() {
+  I = Eigen::MatrixXd::Identity(SIZE_X, SIZE_X);
+
+}
 
 KalmanFilter::~KalmanFilter() {}
 
@@ -22,60 +25,54 @@ void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
 
 void KalmanFilter::Predict() {
   /**
-  TODO:
     * predict the state
   */
     x_ = F_ * x_;
-    MatrixXd Ft = F_.transpose();
-    P_ = F_ * P_ * Ft  + Q_;
+    P_ = F_ * P_ * F_.transpose()  + Q_;
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
   /**
-  TODO:
     * update the state by using Kalman Filter equations
   */
 
     VectorXd z_pred = H_ * x_;
     VectorXd y = z - z_pred;
     MatrixXd Ht = H_.transpose();
-    MatrixXd S = H_ * P_ * Ht + R_;
-    MatrixXd Si = S.inverse();
+    MatrixXd Si = (H_ * P_ * Ht + R_).inverse();
     MatrixXd PHt = P_ * Ht;
     MatrixXd K = PHt * Si;
 
     //new estimate
     x_ = x_ + (K * y);
-    //long x_size = x_.size();
-    MatrixXd I = MatrixXd::Identity(4, 4);
     P_ = (I - K * H_) * P_;
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /*
-  TODO: update the state by using Extended Kalman Filter equations
+  update the state by using Extended Kalman Filter equations
   */
   // calculate the h(x)
   VectorXd h_x;
   VectorXd z_pred_EKF;
-  float sqrt_pxy2 = sqrt( ( x_[0]*x_[0] + x_[1]*x_[1] ));
+  /* calculate h'(x)  */
+  float sqrt_pxy2 = (float) sqrt( ( x_[0]*x_[0] + x_[1]*x_[1] ));
   z_pred_EKF = VectorXd(3);
-  z_pred_EKF(0) = sqrt_pxy2;
-  z_pred_EKF(1) = atan2(x_[1],x_[0]);
-  z_pred_EKF(2) = (x_(0)*x_(2) +  x_(1)*x_(3)) / sqrt_pxy2;
+  z_pred_EKF[0] = sqrt_pxy2;
+  z_pred_EKF[1] = atan2(x_[1],x_[0]); // atan2 takes returns always in the correct quadrant
+  z_pred_EKF[2] = (x_[0]*x_[2] +  x_[1]*x_[3]) / sqrt_pxy2;
+  /* from here is the same as the "normal" KF */
   VectorXd y = z - z_pred_EKF;
 
 
   MatrixXd Ht = H_.transpose();
-  MatrixXd S = H_ * P_ * Ht + R_;
-  MatrixXd Si = S.inverse();
+  MatrixXd Si = (H_ * P_ * Ht + R_).inverse(); // this only applies if we dont use S
+ // MatrixXd Si = S.inverse();
   MatrixXd PHt = P_ * Ht;
   MatrixXd K = PHt * Si;
 
   //new estimate
   x_ = x_ + (K * y);
-  //long x_size = x_.size();
-  MatrixXd I = MatrixXd::Identity(4, 4);
   P_ = (I - K * H_) * P_;
 
 /*

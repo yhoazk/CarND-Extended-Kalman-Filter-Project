@@ -34,12 +34,11 @@ FusionEKF::FusionEKF() {
 
   H_laser_ << 1, 0, 0, 0,
               0, 1, 0, 0;
-  /* Initial values or Hj appear to not influence the result */
+  /* Initial values of Hj appear to not influence the result */
   Hj_ << 10, 10, 0, 0,
          10, 10, 0, 0,
          10,  1,  1,  1;
   /**
-  TODO:
     * Finish initializing the FusionEKF.
     * Set the process and measurement noises
     * Q is the process noise
@@ -65,7 +64,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    ****************************************************************************/
   if (!is_initialized_) {
     /**
-    TODO:
       * Initialize the state ekf_.x_ with the first measurement.
       * Create the covariance matrix. Which oneeee?
       * Remember: you'll need to convert radar from polar to cartesian coordinates.
@@ -118,7 +116,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    ****************************************************************************/
 
   /**
-   TODO:
      * Update the state transition matrix F according to the new elapsed time.
       - Time is measured in seconds.
      * Update the process noise covariance matrix.
@@ -127,7 +124,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     float_t dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;
     previous_timestamp_ = measurement_pack.timestamp_;
 
-  if(dt >  0.001)
+  if(dt >= 0.001f)
   {
 
     float_t dt_2 = dt * dt;
