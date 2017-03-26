@@ -9,7 +9,7 @@
 #include "kalman_filter.h"
 #include "tools.h"
 
-class FusionEKF {
+class FusionEKF : public Tools{
 public:
   /**
   * Constructor.

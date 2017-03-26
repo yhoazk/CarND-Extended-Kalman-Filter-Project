@@ -97,7 +97,7 @@ class ProductBase : public MatrixBase<Derived>
     ProductBase(const Lhs& a_lhs, const Rhs& a_rhs)
       : m_lhs(a_lhs), m_rhs(a_rhs)
     {
-      eigen_assert(a_lhs.cols() == a_rhs.rows()
+        eigen_assert(a_lhs.cols() == a_rhs.rows()
         && "invalid matrix product"
         && "if you wanted a coeff-wise or a dot product use the respective explicit functions");
     }

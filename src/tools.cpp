@@ -10,7 +10,7 @@ Tools::Tools() {}
 
 Tools::~Tools() {}
 
-VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
+ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &ground_truth) {
 
     VectorXd rmse(4);
@@ -50,9 +50,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   TODO:
     * Calculate a Jacobian here.
   */
-
-
-    MatrixXd Hj(3,4);
+    MatrixXd Hj= MatrixXd::Zero(3,4);
     //recover state parameters
     float px = x_state(0);
     float py = x_state(1);
@@ -71,17 +69,16 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
         return Hj;
     }
 
+  //compute the Jacobian matrix
 
     Hj(0,0) = px / sqrt_pxy2;
     Hj(0,1) = py / sqrt_pxy2;
     Hj(1,0) = (-1.0 * py)/pxy2;
     Hj(1,1) = px/pxy2;
-    Hj(2,0) = py * (vx*py - vy*px)/(sqrt_pxy2*sqrt_pxy2*sqrt_pxy2);
-    Hj(2,1) = px * (vy*px - vx*py)/(sqrt_pxy2*sqrt_pxy2*sqrt_pxy2);
+    Hj(2,0) = py * (vx*py - vy*px)/(pxy2*sqrt_pxy2); // TODO: OPtimizar X^3/2 por X*X^1/2
+    Hj(2,1) = px * (vy*px - vx*py)/(pxy2*sqrt_pxy2);
     Hj(2,2) = px / sqrt_pxy2;
     Hj(2,3) = py / sqrt_pxy2;
-
-    //compute the Jacobian matrix
 
     return Hj;
 }
