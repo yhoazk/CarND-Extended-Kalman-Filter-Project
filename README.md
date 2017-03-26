@@ -24,11 +24,11 @@ Self-Driving Car Engineer Nanodegree Program
 Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
 
 
-![[Data 2](https://plot.ly/~yhoazk/8/)](./imgs/Plot6.png)
+[![](./imgs/Plot6.png)](https://plot.ly/~yhoazk/8/)
 
 
 
-![[Data 1](https://plot.ly/~yhoazk/6/)](./imgs/Plot8.png)
+[![](./imgs/Plot8.png)](https://plot.ly/~yhoazk/6/)
 
 
 

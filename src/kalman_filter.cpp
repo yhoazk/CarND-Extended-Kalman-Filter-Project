@@ -48,7 +48,7 @@ void KalmanFilter::Update(const VectorXd &z) {
   */
 
     VectorXd z_pred = H_ * x_;
-    processUpdate(z - z_pred);
+    processUpdate((const VectorXd) z - z_pred);
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -56,7 +56,6 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   update the state by using Extended Kalman Filter equations
   */
   // calculate the h(x)
-  VectorXd h_x;
   VectorXd z_pred_EKF;
   /* calculate h'(x)  */
   float sqrt_pxy2 = (float) sqrt( ( x_[0]*x_[0] + x_[1]*x_[1] ));
