@@ -3,6 +3,33 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Summary
+
+This project implements a sensor fusion scheme for lidar and radar data.
+It uses the kalman filter and extended Kalman filter for laser and radar measurements respetively.
+
+The exteneded Kalman filter is used in the radar data because transfer function for the radar is not linear.
+
+This is how the information is processed:
+![](./imgs/Flow.png)
+
+
+
+
+## Code Style
+
+Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+
+## Dataset #1
+[![](./imgs/Plot6.png)](https://plot.ly/~yhoazk/8/)
+
+![](./imgs/ekf_d1.png)
+## Dataset #2
+[![](./imgs/Plot8.png)](https://plot.ly/~yhoazk/6/)
+![](./imgs/ekf_d2.png)
+
+
+
 ## Dependencies
 
 * cmake >= 3.5
@@ -19,34 +46,11 @@ Self-Driving Car Engineer Nanodegree Program
     - eg. `./ExtendedKF ../data/sample-laser-radar-measurement-data-1.txt output.txt`
 
 
-## Code Style
-
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
-
-
-[![](./imgs/Plot6.png)](https://plot.ly/~yhoazk/8/)
-
-
-
-[![](./imgs/Plot8.png)](https://plot.ly/~yhoazk/6/)
-
-
-
-## Generating Additional Data
-
-This is optional!
-
-If you'd like to generate your own radar and lidar data, see the
-[utilities repo](https://github.com/udacity/CarND-Mercedes-SF-Utilities) for
-Matlab scripts that can generate additional data.
-
 ## Project Instructions and Rubric
 
 Note: regardless of the changes you make, your project must be buildable using
 cmake and make!
 
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/12dd29d8-2755-4b1b-8e03-e8f16796bea8)
-for instructions and the project rubric.
 
 ## Hints!
 
@@ -57,6 +61,13 @@ for instructions and the project rubric.
 
 ### External Refernces
 
+#### Tutorial for Eigen library.
+[https://eigen.tuxfamily.org/dox/group__TutorialMatrixClass.html](https://eigen.tuxfamily.org/dox/group__TutorialMatrixClass.html)
+#### Fragment from Nort Carolina University
 [http://www.cs.unc.edu/~tracker/media/pdf/SIGGRAPH2001_CoursePack_08.pdf](http://www.cs.unc.edu/~tracker/media/pdf/SIGGRAPH2001_CoursePack_08.pdf)
 
 [http://www.cs.unc.edu/~welch/kalman/media/pdf/maybeck_ch1.pdf](http://www.cs.unc.edu/~welch/kalman/media/pdf/maybeck_ch1.pdf)
+
+
+#### This book has some ideas on how to tune a Kalman filter.
+Introduction to Random Signals and Applied Kalman Filtering with Matlab( Robert Brown)

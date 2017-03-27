@@ -66,13 +66,4 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /* from here is the same as the "normal" KF */
   processUpdate(z - z_pred_EKF);
 
-
-/*
- * RMSE <= [0.08, 0.08, 0.60, 0.60] when using the file: "sample-laser-radar-measurement-data-1.txt".
- */
-
-  /*
-   * The px, py, vx, vy output coordinates have an RMSE <= [0.20, 0.20, .50, .85] when using the file: "sample-laser-radar-measurement-data-2.txt".
-   * */
-
 }
