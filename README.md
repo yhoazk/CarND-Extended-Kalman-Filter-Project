@@ -13,18 +13,17 @@ The exteneded Kalman filter is used in the radar data because transfer function 
 This is how the information is processed:
 ![](./imgs/Flow.png)
 
-
-
-
 ## Code Style
 
 Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
 
 ## Dataset #1
+(Click for interactive visualization)
 [![](./imgs/Plot6.png)](https://plot.ly/~yhoazk/8/)
 
 ![](./imgs/ekf_d1.png)
 ## Dataset #2
+(Click for interactive visualization)
 [![](./imgs/Plot8.png)](https://plot.ly/~yhoazk/6/)
 ![](./imgs/ekf_d2.png)
 
